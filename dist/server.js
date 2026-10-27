@@ -1,0 +1,1 @@
+const path=require("path"); const b=path.resolve(__dirname, "../backend"); process.chdir(b); require(path.join(b, "dist", "server.js"));
