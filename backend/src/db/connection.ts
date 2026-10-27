@@ -55,7 +55,7 @@ class DatabaseManager {
     if (this.isPostgres && this.pgPool) {
       const pgSql = this.convertPlaceholdersForPostgres(sql);
       const res = await this.pgPool.query(pgSql, params);
-      return res.rows.map((row) => this.normalizeRow(row));
+      return res.rows.map((row: any) => this.normalizeRow(row));
     } else if (this.libsqlClient) {
       const res = await this.libsqlClient.execute({ sql, args: params });
       return res.rows.map((row) => this.normalizeRow(row as any));
@@ -96,7 +96,7 @@ class DatabaseManager {
           query: async <R = any>(sql: string, params: any[] = []): Promise<R[]> => {
             const pgSql = this.convertPlaceholdersForPostgres(sql);
             const res = await client.query(pgSql, params);
-            return res.rows.map((row) => this.normalizeRow(row));
+            return res.rows.map((row: any) => this.normalizeRow(row));
           },
           execute: async (sql: string, params: any[] = []) => {
             const pgSql = this.convertPlaceholdersForPostgres(sql);
